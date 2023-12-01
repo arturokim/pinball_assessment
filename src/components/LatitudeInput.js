@@ -1,22 +1,31 @@
-import { useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Input } from "semantic-ui-react";
 
 import { CoordinatesContext } from "../context/CoordinatesContext";
 import './NumberInput.css';
 
 const LatitudeInput = () => {
-  const { latitude, setLatitude } = useContext(CoordinatesContext)
+  const { setLatitude } = useContext(CoordinatesContext);
+
+  const [debouncedInputValue, setDebouncedInputValue] = useState('');
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setLatitude(debouncedInputValue)
+    }, 500);
+    return () => clearTimeout(timeout)
+  }, [debouncedInputValue, setLatitude]);
 
   const onChangeHandler = (e) => {
     e.preventDefault();
     const userInput = e.target.value;
-    setLatitude(userInput);
+    setDebouncedInputValue(userInput);
   }
 
   return (
     <div className="latitude">
       <label htmlFor="latitude" id="latitude">Latitude</label>
-      <Input type="number" value={latitude} id="latitude" name="latitude" onChange={onChangeHandler} />
+      <Input type="number" value={debouncedInputValue} id="latitude" name="latitude" onChange={onChangeHandler} />
     </div>
   )
 }
