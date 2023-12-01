@@ -1,5 +1,5 @@
-import { useContext } from "react";
-import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
+import { useContext, useMemo } from "react";
+import { GoogleMap, useLoadScript, MarkerF } from '@react-google-maps/api';
 
 import { CoordinatesContext } from "../context/CoordinatesContext";
 import { MarkerContext } from "../context/MarkerContext";
@@ -17,34 +17,39 @@ const Map = () => {
   const longitudeNum = Number(longitude);
   const latitudeNum = Number(latitude);
 
-  const { isLoaded, loadError } = useLoadScript({
+  const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API_KEY,
     libraries,
   });
 
-  if (loadError) {
-    return <div>Error loading maps</div>;
-  }
+  const center = useMemo(() => {
+    return { lat: latitudeNum, lng: longitudeNum }
+  },[latitudeNum, longitudeNum])
 
   if (!isLoaded) {
     return <div>Loading maps</div>;
   }
 
   return (
-    <GoogleMap
-      className="map"
-      mapContainerStyle={mapContainerStyle}
-      zoom={10}
-      center={{ lat: latitudeNum, lng: longitudeNum }}
-    >
-    {markers.map(({id, position}) => {
-      return <Marker
-        key={id}
-        position={position}
-      >
-      </Marker>
-    })}
-    </GoogleMap>
+    <div>
+      {!isLoaded ? (
+        <h1>Loading...</h1>
+      ) : (
+        <GoogleMap
+          className="map"
+          mapContainerStyle={mapContainerStyle}
+          zoom={10}
+          center={center}
+        >
+        {markers.map(({ id, position }) => (
+          <MarkerF
+            key={id}
+            position={position}
+          />
+        ))}
+        </GoogleMap>
+      )}
+    </div>
   );
 }
 
