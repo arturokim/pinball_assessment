@@ -14,10 +14,10 @@ const LandingPage = ({ isClicked, setIsClicked }) => {
       <Grid columns={2}>
         <Grid.Row>
           <Grid.Column width={8}>
-            <LongitudeInput />
+            <LatitudeInput />
           </Grid.Column>
           <Grid.Column>
-            <LatitudeInput />
+            <LongitudeInput />
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>

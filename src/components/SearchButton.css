@@ -1,4 +1,13 @@
 .search-button {
   float: left;
-  /* font-size: 1rem; */
+}
+
+.ui.large.button.search-button {
+  background-color: #38424f;
+  color: white;
+}
+
+.ui.large.button.search-button:hover {
+  background-color: #2b323e;
+  color: white;
 }

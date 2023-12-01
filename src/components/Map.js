@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
 
 import { CoordinatesContext } from "../context/CoordinatesContext";
+import { MarkerContext } from "../context/MarkerContext";
 
 const libraries = ['places'];
 const mapContainerStyle = {
@@ -11,6 +12,8 @@ const mapContainerStyle = {
 
 const Map = () => {
   const { longitude, latitude } = useContext(CoordinatesContext);
+  const { markers } = useContext(MarkerContext);
+
   const longitudeNum = Number(longitude);
   const latitudeNum = Number(latitude);
 
@@ -28,15 +31,20 @@ const Map = () => {
   }
 
   return (
-    <div className="map">
-      <GoogleMap
-        mapContainerStyle={mapContainerStyle}
-        zoom={10}
-        center={{ lat: latitudeNum, lng: longitudeNum }}
+    <GoogleMap
+      className="map"
+      mapContainerStyle={mapContainerStyle}
+      zoom={10}
+      center={{ lat: latitudeNum, lng: longitudeNum }}
+    >
+    {markers.map(({id, position}) => {
+      return <Marker
+        key={id}
+        position={position}
       >
-        <Marker position={{ lat: latitudeNum, lng: longitudeNum }} />
-      </GoogleMap>
-    </div>
+      </Marker>
+    })}
+    </GoogleMap>
   );
 }
 
