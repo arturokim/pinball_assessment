@@ -1,0 +1,14 @@
+.app {
+  background-color: #282b42;
+}
+
+.landing-page {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.landing-page-no-h {
+  height: 100vh;
+  margin-left: 20px;
+  margin-right: 20px;
+}

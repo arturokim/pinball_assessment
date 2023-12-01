@@ -1,0 +1,12 @@
+input::-webkit-outer-spin-button,
+   input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+   }
+
+.latitude, .longitude {
+   color: white;
+}
+
+#latitude, #longitude {
+   padding-right: 10px;
+}

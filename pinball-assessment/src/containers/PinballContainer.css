@@ -1,0 +1,4 @@
+.pinball-container {
+  height: 80vh; 
+  overflow: auto;
+}

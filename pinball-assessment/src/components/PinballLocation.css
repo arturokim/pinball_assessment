@@ -1,0 +1,12 @@
+.pinball .name {
+  padding: 1rem 0 0 1.2rem;
+}
+
+.pinball .address {
+  padding: 0 0 0 1.2rem;
+}
+
+.ui.segments .information {
+  background-color: #2e3147;
+  color: white;
+}
