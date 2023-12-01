@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import { Button } from "semantic-ui-react";
 
-import './NearMeButton.css';
 import fetchData from '../utils/fetchData';
 import { CoordinatesContext } from "../context/CoordinatesContext";
 import { MachineContext } from "../context/MachineContext";
+import './NearMeButton.css';
 
 const NearMeButton = ({ isClicked, setIsClicked }) => { 
   const { setLatitude, setLongitude } = useContext(CoordinatesContext);

@@ -18,20 +18,22 @@ const fetchData = (latitude, longitude) => {
       const response = await fetch(`${URL}/region/${region}/locations.json`);
       const data = await response.json();
       const activeLocations = data.locations.filter(location => location.ic_active === true)
-      const locationData = activeLocations.map(activeLocation => {
-        // TODOS: Destructure each property needed new lines if it's too long
-        /* TODOS: return {
+      const locationData = activeLocations.map(({ 
+        name, 
+        lat, 
+        lon, 
+        street, 
+        city, 
+        state, 
+        location_machine_xrefs 
+      }) => {
+        return {
           name,
-          lat,
-          lon
-        } */
-        const data = {};
-        data.name = activeLocation.name;
-        data.latitude = activeLocation.lat;
-        data.longitude = activeLocation.lon;
-        data.address = `${activeLocation.street} ${activeLocation.city} ${activeLocation.state}`
-        data.machines = activeLocation.location_machine_xrefs.map(location => location.machine.name)
-        return data;
+          latitude: lat,
+          longitude: lon,
+          address: `${street} ${city} ${state}`,
+          machines: location_machine_xrefs.map(location => location.machine.name),
+        };
       });
       return locationData;
     } catch (error) {

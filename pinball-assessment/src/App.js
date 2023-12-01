@@ -16,7 +16,6 @@ const App = () => {
   const [isClicked, setIsClicked] = useState(false);
 
   const machinesCtxValue = { machinesData, setMachinesData }
-
   const coordinatesCtxValue = { longitude, latitude, setLongitude, setLatitude }
 
   return (
